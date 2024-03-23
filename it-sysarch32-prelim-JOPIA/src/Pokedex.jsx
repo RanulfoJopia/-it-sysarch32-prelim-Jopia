@@ -1,13 +1,7 @@
-// Pokedex.jsx
-import React, { useState } from 'react';
+import React from 'react';
 import Pokemon from './Pokemon';
 
-const Pokedex = ({ pokemonList, currentPage, totalPages, setCurrentPage }) => {
-  const [language, setLanguage] = useState('english');
-
-  const handleLanguageChange = (lang) => {
-    setLanguage(lang);
-  }
+const Pokedex = ({ pokemonList, currentPage, totalPages, setCurrentPage, selectedLanguage, onLanguageChange }) => {
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -24,10 +18,10 @@ const Pokedex = ({ pokemonList, currentPage, totalPages, setCurrentPage }) => {
   return (
     <div>
       <div>
-        <button className="l1" onClick={() => handleLanguageChange('english')}>English</button>
-        <button className="l1" onClick={() => handleLanguageChange('japanese')}>Japanese</button>
-        <button className="l1" onClick={() => handleLanguageChange('chinese')}>Chinese</button>
-        <button className="l1" onClick={() => handleLanguageChange('french')}>French</button>
+        <button className="l1" onClick={() => onLanguageChange('english')}>English</button>
+        <button className="l1" onClick={() => onLanguageChange('japanese')}>Japanese</button>
+        <button className="l1" onClick={() => onLanguageChange('chinese')}>Chinese</button>
+        <button className="l1" onClick={() => onLanguageChange('french')}>French</button>
       </div>
       <div>
         <button
@@ -56,7 +50,7 @@ const Pokedex = ({ pokemonList, currentPage, totalPages, setCurrentPage }) => {
         </button>
       </div>
       {pokemonList.map(pokemon => (
-        <Pokemon key={pokemon.id} pokemon={pokemon} language={language} />
+        <Pokemon key={pokemon.id} pokemon={pokemon} language={selectedLanguage} />
       ))}
       <div>
         Current Page: {currentPage} / Total Pages: {totalPages}

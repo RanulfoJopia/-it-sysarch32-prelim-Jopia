@@ -1,4 +1,3 @@
-// App.jsx
 import React, { useState, useEffect } from 'react';
 import Header from './Header';
 import Pokedex from './Pokedex';
@@ -8,6 +7,7 @@ const App = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
+  const [selectedLanguage, setSelectedLanguage] = useState('english'); // State for selected language
 
   useEffect(() => {
     setLoading(true);
@@ -24,6 +24,10 @@ const App = () => {
       });
   }, [currentPage]);
 
+  const handleLanguageChange = (lang) => {
+    setSelectedLanguage(lang); // Update selected language
+  }
+
   return (
     <div>
       <Header />
@@ -35,6 +39,8 @@ const App = () => {
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}
+          selectedLanguage={selectedLanguage} // Pass selected language to Pokedex
+          onLanguageChange={handleLanguageChange} // Pass language change handler to Pokedex
         />
       )}
     </div>
